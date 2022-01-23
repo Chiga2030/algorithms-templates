@@ -15,6 +15,22 @@ process.stdin.on('end', solve);
 
 function movingAverage(array, windowSize) {
     // Ваше решение
+    const length = array.length - windowSize;
+    const result = new Array(length);
+    let currentAvg = 0;
+
+    for (let i = 0; i < windowSize; ++i) {
+        currentAvg += array[i];
+    }
+
+    for (let i = 0; i <= length; ++i) {
+        result[i] = currentAvg / windowSize;
+
+        currentAvg -= array[i];
+        currentAvg += array[windowSize + i];
+    }
+
+    return result;
 }
 
 function solve() {
